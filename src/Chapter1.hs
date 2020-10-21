@@ -478,7 +478,7 @@ Implement a function that returns the last digit of a given number.
   whether it works for you!
 -}
 lastDigit :: Int -> Int
-lastDigit n = mod n 10
+lastDigit n = mod (abs n) 10
 
 
 {- |
@@ -633,7 +633,7 @@ specifying complex expressions.
 -}
 sumLast2 :: Int -> Int
 sumLast2 n = 
-    let last2Dig = mod n 100
+    let last2Dig = mod (abs n) 100
     in mod last2Dig 10 + div last2Dig 10
 
 {- |
@@ -657,7 +657,7 @@ aren't ready for this boss yet!
 firstDigit n = if abs n < 10 then abs n else divisible n 
   where
     divisible :: Int -> Int
-    divisible x = let div10 = div (abs x) 10 in if div10 > 10 then divisible div10 else div10 
+    divisible x = let div10 = div (abs x) 10 in if div10 >= 10 then divisible div10 else div10 
 
 
 {-
