@@ -624,13 +624,13 @@ Write a function that takes elements of a list only on even positions.
 [2,3,4]
 -}
 takeEven :: [a] -> [a]
-takeEven x = go  0 x
+takeEven x = go True x
   where
-    go :: Int -> [a] -> [a]
+    go :: Bool -> [a] -> [a]
     go acc [] = []
-    go acc (x:xs) = case mod acc 2 of
-      0 -> x : go (acc + 1) xs
-      1 -> go (acc + 1) xs
+    go acc (x:xs) = case acc of
+      True -> x : go (not acc) xs
+      False -> go (not acc) xs
 
 {- |
 =🛡= Higher-order functions
@@ -737,7 +737,7 @@ value of the element itself
 🕯 HINT: Use combination of 'map' and 'replicate'
 -}
 smartReplicate :: [Int] -> [Int]
-smartReplicate l = concat (map (\x -> replicate x x) l)
+smartReplicate = concatMap (\x -> replicate x x)
 
 {- |
 =⚔️= Task 9
@@ -751,7 +751,7 @@ the list with only those lists that contain a passed element.
 🕯 HINT: Use the 'elem' function to check whether an element belongs to a list
 -}
 contains :: Int -> [[Int]] -> [[Int]]
-contains x y = filter (\z -> elem x z) y
+contains x = filter (\z -> elem x z)
 
 {- |
 =🛡= Eta-reduction
@@ -796,7 +796,7 @@ listElementsLessThan :: Int -> [Int] -> [Int]
 listElementsLessThan x = filter (< x)
 
 pairMul :: [Int] -> [Int] -> [Int]
-pairMul xs ys = zipWith (*) xs ys
+pairMul = zipWith (*)
 
 {- |
 =🛡= Lazy evaluation
